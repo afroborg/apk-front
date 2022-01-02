@@ -41,6 +41,18 @@ const Pagination: React.FC<Props> = ({
           <FiChevronLeft />
         </PaginationBtn>
 
+        {!isFirstPage && (
+          <>
+            <PaginationBtn onClick={handlePageChange(1)}>1</PaginationBtn>
+
+            <div className="mb-3 hidden md:block">...</div>
+
+            <PaginationBtn onClick={handlePageChange(page - 1)}>
+              {page - 1}
+            </PaginationBtn>
+          </>
+        )}
+
         <PaginationBtn isActive>
           <span>{page}</span>
         </PaginationBtn>
@@ -51,7 +63,7 @@ const Pagination: React.FC<Props> = ({
               <span>{nextPage}</span>
             </PaginationBtn>
 
-            <div className="mb-3">...</div>
+            <div className="mb-3 hidden md:block">...</div>
 
             <PaginationBtn onClick={handlePageChange(totalPages)}>
               <span>{totalPages}</span>
