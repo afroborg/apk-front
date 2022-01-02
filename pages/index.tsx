@@ -1,4 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import AlcoholGrid from '../components/alcohol-grid';
 import Filters from '../components/filters';
@@ -27,16 +28,22 @@ const Home: NextPage<Props> = ({ alcohols, meta, category }) => {
   };
 
   return (
-    <div className="p-6 flex flex-col gap-2 md:p-12 md:pt-6">
-      <Filters
-        activeCategory={category}
-        onFilter={(c) => filter({ category: c })}
-      />
+    <>
+      <Head>
+        <title>APK | Jämför bäst alkohol per krona på systembolaget</title>
+      </Head>
 
-      <AlcoholGrid alcohols={alcohols} />
+      <div className="p-6 flex flex-col gap-2 md:p-12 md:pt-6">
+        <Filters
+          activeCategory={category}
+          onFilter={(c) => filter({ category: c })}
+        />
 
-      <Pagination {...meta} onPageChange={(page) => filter({ page })} />
-    </div>
+        <AlcoholGrid alcohols={alcohols} />
+
+        <Pagination {...meta} onPageChange={(page) => filter({ page })} />
+      </div>
+    </>
   );
 };
 

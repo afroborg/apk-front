@@ -26,14 +26,14 @@ const Navbar: React.FC<Props> = ({ path }) => {
         {routes.map((route) => {
           const isActive = path === route.path;
           return (
-            <Link href={route.path} key={route.path}>
-              <div
+            <Link href={route.path} key={route.path} passHref>
+              <a
                 className={`${
                   isActive ? 'font-semibold' : 'font-normal'
                 } cursor-pointer`}
               >
                 {route.name}
-              </div>
+              </a>
             </Link>
           );
         })}

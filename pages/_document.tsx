@@ -16,8 +16,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>APK | Jämför bäst alkohol per krona på systembolaget</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
