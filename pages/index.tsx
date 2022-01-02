@@ -17,8 +17,6 @@ const Home: NextPage<Props> = ({ alcohols, meta, category }) => {
   const router = useRouter();
 
   const filter = (options: FetchAlcoholOptions) => {
-    console.log(options);
-
     const opts = router.query as FetchAlcoholOptions;
     const newOpts = { ...opts, ...options };
 
@@ -30,7 +28,10 @@ const Home: NextPage<Props> = ({ alcohols, meta, category }) => {
 
   return (
     <div className="p-6 flex flex-col gap-2 md:p-12 md:pt-6">
-      <Filters activeCategory={category} />
+      <Filters
+        activeCategory={category}
+        onFilter={(c) => filter({ category: c })}
+      />
 
       <AlcoholGrid alcohols={alcohols} />
 

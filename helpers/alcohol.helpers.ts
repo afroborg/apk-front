@@ -16,3 +16,12 @@ export const fetchAlcohols = async (opts: FetchAlcoholOptions) =>
       category: opts.category ?? '',
     },
   });
+
+export const categories = [
+  'Allt',
+  'Öl',
+  'Vin',
+  'Cider & blanddrycker',
+  'Sprit',
+  'Alkoholfritt',
+] as const;

@@ -1,5 +1,5 @@
 export interface IAlcohol {
-  id: number;
+  ID: number;
   name: string;
   category: string;
   price: number;

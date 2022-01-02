@@ -1,8 +1,11 @@
 import React from 'react';
-import styles from '../styles/logo.module.scss';
 
 const Logo = () => {
-  return <div className={styles.logo}></div>;
+  return (
+    <a href="/" className="h-full aspect-square p-2">
+      <img src="/logo.svg" />
+    </a>
+  );
 };
 
 export default Logo;

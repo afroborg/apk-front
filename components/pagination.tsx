@@ -45,15 +45,19 @@ const Pagination: React.FC<Props> = ({
           <span>{page}</span>
         </PaginationBtn>
 
-        <PaginationBtn onClick={handlePageChange(nextPage)}>
-          <span>{nextPage}</span>
-        </PaginationBtn>
+        {!isLastPage && (
+          <>
+            <PaginationBtn onClick={handlePageChange(nextPage)}>
+              <span>{nextPage}</span>
+            </PaginationBtn>
 
-        <div className="mb-3">...</div>
+            <div className="mb-3">...</div>
 
-        <PaginationBtn onClick={handlePageChange(totalPages)}>
-          <span>{totalPages}</span>
-        </PaginationBtn>
+            <PaginationBtn onClick={handlePageChange(totalPages)}>
+              <span>{totalPages}</span>
+            </PaginationBtn>
+          </>
+        )}
 
         <PaginationBtn
           onClick={handlePageChange(page + 1)}

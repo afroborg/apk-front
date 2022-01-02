@@ -9,6 +9,7 @@ type Props = {
 const PaginationBtn: React.FC<Props> = ({
   isActive = false,
   disabled = false,
+  onClick,
   children,
 }) => {
   return (
@@ -16,6 +17,7 @@ const PaginationBtn: React.FC<Props> = ({
       className={`w-10 h-10 rounded-full flex items-center justify-center 
 	  ${isActive ? 'bg-slate-700 text-white' : 'bg-slate-300'}
 	  ${disabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'}`}
+      onClick={onClick}
     >
       {children}
     </button>

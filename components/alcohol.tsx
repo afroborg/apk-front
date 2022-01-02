@@ -4,7 +4,7 @@ import { BsEmojiDizzy } from 'react-icons/bs';
 import { CgGlassAlt } from 'react-icons/cg';
 import { FiShoppingCart } from 'react-icons/fi';
 import { GiGlassShot, GiWaterBottle, GiWineBottle } from 'react-icons/gi';
-import { IoBeerOutline, IoResize } from 'react-icons/io5';
+import { IoBeerOutline, IoResize, IoWaterOutline } from 'react-icons/io5';
 import { IAlcohol } from '../models/IAlcohol';
 import AlcoholFact from './alcohol-fact';
 
@@ -25,9 +25,9 @@ const icons: Record<string, { icon: IconType; color: string }> = {
     icon: GiGlassShot,
     color: 'bg-red-400',
   },
-  default: {
-    icon: CgGlassAlt,
-    color: 'bg-lime-400',
+  Alkoholfritt: {
+    icon: IoWaterOutline,
+    color: 'bg-sky-400',
   },
 };
 
@@ -39,7 +39,10 @@ const Alcohol: React.FC<IAlcohol> = ({
   category,
   apk,
 }) => {
-  const icon = icons[category] ?? icons.default;
+  const icon = icons[category] ?? {
+    icon: CgGlassAlt,
+    color: 'bg-lime-400',
+  };
 
   return (
     <a href={link} target="_blank" rel="noreferrer">
