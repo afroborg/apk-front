@@ -31,6 +31,15 @@ const Home: NextPage<Props> = ({ alcohols, meta, category }) => {
     <>
       <Head>
         <title>APK | Jämför bäst alkohol per krona på systembolaget</title>
+        <meta
+          name="description"
+          content="Se vilken produkt på systembolaget som ger dig bäst APK (alkohol per krona), så att du kan få bäst valuta för dina pengar!"
+        />
+        <meta
+          name="keywords"
+          content="APK, Systembolaget, Student, Öl, Alkohol, Vin, Pengar"
+        />
+        <meta name="author" content="Axel Froborg" />
       </Head>
 
       <div className="p-6 flex flex-col gap-2 md:p-12 md:pt-6">

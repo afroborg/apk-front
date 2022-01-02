@@ -35,6 +35,7 @@ const Pagination: React.FC<Props> = ({
 
       <div className="flex items-center gap-2">
         <PaginationBtn
+          label="Gå till föregående sida"
           onClick={handlePageChange(page - 1)}
           disabled={isFirstPage}
         >
@@ -43,35 +44,47 @@ const Pagination: React.FC<Props> = ({
 
         {!isFirstPage && (
           <>
-            <PaginationBtn onClick={handlePageChange(1)}>1</PaginationBtn>
+            <PaginationBtn label="Gå till sida 1" onClick={handlePageChange(1)}>
+              1
+            </PaginationBtn>
 
             <div className="mb-3 hidden md:block">...</div>
 
-            <PaginationBtn onClick={handlePageChange(page - 1)}>
+            <PaginationBtn
+              label="Gå till föregående sida"
+              onClick={handlePageChange(page - 1)}
+            >
               {page - 1}
             </PaginationBtn>
           </>
         )}
 
-        <PaginationBtn isActive>
+        <PaginationBtn label={`Du är på sida ${page}`} isActive>
           <span>{page}</span>
         </PaginationBtn>
 
         {!isLastPage && (
           <>
-            <PaginationBtn onClick={handlePageChange(nextPage)}>
+            <PaginationBtn
+              label="Gå till nästa sida"
+              onClick={handlePageChange(nextPage)}
+            >
               <span>{nextPage}</span>
             </PaginationBtn>
 
             <div className="mb-3 hidden md:block">...</div>
 
-            <PaginationBtn onClick={handlePageChange(totalPages)}>
+            <PaginationBtn
+              label="Gå till sista sidan"
+              onClick={handlePageChange(totalPages)}
+            >
               <span>{totalPages}</span>
             </PaginationBtn>
           </>
         )}
 
         <PaginationBtn
+          label="Gå till nästa sida"
           onClick={handlePageChange(page + 1)}
           disabled={isLastPage}
         >
