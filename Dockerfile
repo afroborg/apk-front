@@ -11,13 +11,15 @@ FROM node:alpine AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
+
 RUN yarn build && yarn install --production --ignore-scripts --prefer-offline
 
 # Production image, copy all the files and run next
 FROM node:alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV="production"
+ENV ROUTER_RULE="Host(`apk.axel.froborg.com`)"
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
@@ -29,11 +31,15 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
+LABEL traefik.http.routers.apk-frontend.rule=${ROUTER_RULE}
+LABEL traefik.http.routers.apk-frontend.tls=true
+LABEL traefik.http.routers.apk-frontend.tls.certresolver=le
+
 USER nextjs
 
 EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT=3000
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry

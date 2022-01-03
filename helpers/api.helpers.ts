@@ -12,8 +12,9 @@ export const getAsync = async <T>(
   endpoint: string,
   { headers, query }: RequestOptions = {}
 ) => {
+  const URL = `${config.API_URL}${endpoint}?${queryParams(query)}`;
   const res = await fetch(
-    `${config.API_URL}${endpoint}?${queryParams(query)}`,
+    URL,
     {
       method: 'GET',
       headers,
