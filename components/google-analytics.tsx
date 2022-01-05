@@ -6,11 +6,6 @@ import { pageview } from '../helpers/ga.helpers';
 
 const GoogleAnalytics: React.FC = () => {
   const { GA_TRACKING_ID } = config;
-
-  if (process.env.NODE_ENV !== 'production' || !GA_TRACKING_ID) {
-    return null;
-  }
-
   const router = useRouter();
 
   useEffect(() => {
@@ -23,6 +18,10 @@ const GoogleAnalytics: React.FC = () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
+
+  if (process.env.NODE_ENV !== 'production' || !GA_TRACKING_ID) {
+    return null;
+  }
 
   return (
     <>
