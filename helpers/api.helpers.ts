@@ -27,6 +27,6 @@ const queryParams = (params?: QueryParams) => {
   if (!params) return '';
 
   return Object.keys(params)
-    .map((k) => `${k}=${params[k]}`)
+    .map((k) => `${k}=${encodeURIComponent(params[k])}`)
     .join('&');
 };

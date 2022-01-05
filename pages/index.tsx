@@ -69,11 +69,14 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
     return isNaN(parsed) ? fb : parsed;
   };
 
-  const { page, per_page, category = 'Allt' } = query as Record<string, string>;
+  const { page, per_page, category } = query as Record<string, string>;
+
+  const cat = !category || category === 'Allt' ? undefined : category
 
   const res = await fetchAlcohols({
     page: tryParse(page, 1),
     perPage: tryParse(per_page, 30),
+    category: cat
   });
 
   return {
