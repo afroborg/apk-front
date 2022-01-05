@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import AlcoholGrid from '../components/alcohol-grid';
 import Filters from '../components/filters';
 import Pagination from '../components/pagination';
+import Search from '../components/search';
 import { FetchAlcoholOptions, fetchAlcohols } from '../helpers/alcohol.helpers';
 import { IAlcohol } from '../models/IAlcohol';
 import { IResponseMeta } from '../models/IResponse';
@@ -11,14 +12,15 @@ import { IResponseMeta } from '../models/IResponse';
 type Props = {
   alcohols: IAlcohol[];
   meta: IResponseMeta;
-  category: string;
+  category: string | null;
+  search: string | null;
 };
 
-const Home: NextPage<Props> = ({ alcohols, meta, category }) => {
+const Home: NextPage<Props> = ({ alcohols, meta, category, search }) => {
   const router = useRouter();
 
-  const filter = (options: FetchAlcoholOptions) => {
-    const opts = router.query as FetchAlcoholOptions;
+  const filter = (options: Partial<FetchAlcoholOptions>) => {
+    const opts = router.query as Partial<FetchAlcoholOptions>;
     const newOpts = { ...opts, ...options };
 
     router.push({
@@ -43,6 +45,8 @@ const Home: NextPage<Props> = ({ alcohols, meta, category }) => {
       </Head>
 
       <div className="p-6 flex flex-col gap-2 md:p-12 md:pt-6">
+        <Search search={search} onSearch={(s) => filter({ search: s })} />
+
         <Filters
           activeCategory={category}
           onFilter={(c) => filter({ category: c })}
@@ -69,21 +73,26 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
     return isNaN(parsed) ? fb : parsed;
   };
 
-  const { page, per_page, category } = query as Record<string, string>;
+  const {
+    page,
+    per_page,
+    category = null,
+    search = null,
+  } = query as Record<string, string>;
 
-  const cat = !category || category === 'Allt' ? undefined : category
-
-  const res = await fetchAlcohols({
+  const { data: alcohols, meta } = await fetchAlcohols({
     page: tryParse(page, 1),
     perPage: tryParse(per_page, 30),
-    category: cat
+    category,
+    search,
   });
 
   return {
     props: {
-      alcohols: res.data,
-      meta: res.meta,
+      alcohols,
+      meta,
       category,
+      search,
     },
   };
 };

@@ -3,9 +3,10 @@ import { IResponse } from '../models/IResponse';
 import { getAsync } from './api.helpers';
 
 export type FetchAlcoholOptions = {
-  page?: number;
-  perPage?: number;
-  category?: string;
+  page: number | null;
+  perPage: number | null;
+  category: string | null;
+  search: string | null;
 };
 
 export const fetchAlcohols = async (opts: FetchAlcoholOptions) =>
@@ -14,11 +15,11 @@ export const fetchAlcohols = async (opts: FetchAlcoholOptions) =>
       page: opts.page ?? 1,
       per_page: opts.perPage ?? 102,
       category: opts.category ?? '',
+      search: opts.search ?? '',
     },
   });
 
 export const categories = [
-  'Allt',
   'Öl',
   'Vin',
   'Cider & blanddrycker',
