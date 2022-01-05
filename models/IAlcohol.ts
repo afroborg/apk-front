@@ -1,6 +1,7 @@
 export interface IAlcohol {
   ID: number;
   name: string;
+  thinName: string;
   category: string;
   price: number;
   volume: number;

@@ -34,6 +34,7 @@ const icons: Record<string, { icon: IconType; color: string }> = {
 const Alcohol: React.FC<IAlcohol> = ({
   link,
   name,
+  thinName,
   price,
   volume,
   category,
@@ -55,7 +56,10 @@ const Alcohol: React.FC<IAlcohol> = ({
             <icon.icon />
           </div>
 
-          <p className="font-semibold">{name}</p>
+          <div>
+            <p className="font-semibold">{name}</p>
+            {thinName && <p className="font-light text-sm">{thinName}</p>}
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-2">

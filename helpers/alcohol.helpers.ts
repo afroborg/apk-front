@@ -9,7 +9,14 @@ export type FetchAlcoholOptions = {
   search: string | null;
 };
 
-export const fetchAlcohols = async (opts: FetchAlcoholOptions) =>
+/**
+ * Fetches alcohols from the api
+ * @param {FetchAlcoholOptions} opts Query parameters to filter
+ * @returns {Promise<IResponse<IAlcohol[]> | null>} Null if something goes wrong
+ */
+export const fetchAlcohols = async (
+  opts: FetchAlcoholOptions
+): Promise<IResponse<IAlcohol[]> | null> =>
   getAsync<IResponse<IAlcohol[]>>('/alcohols', {
     query: {
       page: opts.page ?? 1,
@@ -17,7 +24,7 @@ export const fetchAlcohols = async (opts: FetchAlcoholOptions) =>
       category: opts.category ?? '',
       search: opts.search ?? '',
     },
-  });
+  }).catch(() => null);
 
 export const categories = [
   'Öl',

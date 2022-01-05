@@ -1,4 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next';
+import NextError from 'next/error';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import AlcoholGrid from '../components/alcohol-grid';
@@ -80,17 +81,24 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
     search = null,
   } = query as Record<string, string>;
 
-  const { data: alcohols, meta } = await fetchAlcohols({
+  const res = await fetchAlcohols({
     page: tryParse(page, 1),
     perPage: tryParse(per_page, 30),
     category,
     search,
   });
 
+  if (!res) {
+    throw new NextError({
+      title: 'Kunde inte hämta alkoholerna :(',
+      statusCode: 404,
+    });
+  }
+
   return {
     props: {
-      alcohols,
-      meta,
+      alcohols: res.data,
+      meta: res.meta,
       category,
       search,
     },
